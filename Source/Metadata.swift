@@ -295,7 +295,9 @@ extension Metadata {
                 let cMangledTypeName = fieldRecords[i].mangledTypeName!
                 
                 let functionMap: [String: () -> Any.Type?] = [
-                    "function": { _getTypeByMangledNameInContext(cMangledTypeName, UInt(getMangledTypeNameSize(cMangledTypeName)), genericContext: self.contextDescriptorPointer, genericArguments: self.genericArgumentVector) }
+                    // Xoá _getTypeByMangledNameInContext để build được
+                    // "function": { _getTypeByMangledNameInContext(cMangledTypeName, UInt(getMangledTypeNameSize(cMangledTypeName)), genericContext: self.contextDescriptorPointer, genericArguments: self.genericArgumentVector) }
+                    "function": { nil }
                 ]
                 if let function = functionMap["function"],let fieldType  = function() {
                     result.append(Property.Description(key: name, type: fieldType, offset: fieldOffsets[i]))
